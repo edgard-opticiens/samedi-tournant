@@ -157,13 +157,13 @@ body{background:#fff;padding:0;}
       <div class="sec-hdr"><span class="sec-ttl">Echange de samedi tournant</span></div>
       <div class="sec-body">
         <div class="dg">
-          <div class="fg"><label class="lbl">Samedi travaille</label><input class="inp" type="date" id="stD" onchange="calcRecap()" autocomplete="off"></div>
-          <div class="fg"><label class="lbl">Jour de repos habituel echange</label><input class="inp" type="date" id="stR" onchange="calcRecap()" autocomplete="off"></div>
+          <div class="fg"><label class="lbl">Samedi non travaille</label><input class="inp" type="date" id="stD" onchange="calcRecap()" autocomplete="off"></div>
+          <div class="fg"><label class="lbl">Date du jour de repos echange</label><input class="inp" type="date" id="stR" onchange="calcRecap()" autocomplete="off"></div>
         </div>
         <div class="jr" id="jrBlk" style="display:none"><div class="jrn" id="jrN"></div></div>
-        <div class="jrwarn" id="jrWarn">La date saisie comme "samedi travaille" ne tombe pas un samedi. Verifiez la date.</div>
+        <div class="jrwarn" id="jrWarn">La date saisie comme "samedi non travaille" ne tombe pas un samedi. Verifiez la date.</div>
         <div class="fg" style="margin-top:10px"><label class="lbl">Commentaire (facultatif)</label><textarea class="inp" id="commentaire" rows="2" placeholder="Precision utile pour le directeur ou les RH..."></textarea></div>
-        <div class="rappel">Ce samedi est travaille en echange du jour de repos habituel indique ci-dessus, qui sera lui non travaille sur la semaine concernee.</div>
+        <div class="rappel">Ce samedi n'est pas travaille, en echange du jour de repos habituel indique ci-dessus, qui sera lui travaille sur la semaine concernee.</div>
       </div>
     </div>
     <div class="sigs">
@@ -363,8 +363,8 @@ function calcRecap(){
   var jrBlk=ge('jrBlk'),jrN=ge('jrN'),jrWarn=ge('jrWarn');
   if(!d&&!r){jrBlk.style.display='none';jrWarn.style.display='none';return;}
   var parts=[];
-  if(d)parts.push('<b>'+cap(weekday(d))+' '+fD(d)+'</b> travaille');
-  if(r)parts.push('en echange du <b>'+cap(weekday(r))+' '+fD(r)+'</b> (repos)');
+  if(d)parts.push('<b>'+cap(weekday(d))+' '+fD(d)+'</b> non travaille');
+  if(r)parts.push('en echange du <b>'+cap(weekday(r))+' '+fD(r)+'</b> travaille');
   jrN.innerHTML=parts.join(' ');
   jrBlk.style.display=parts.length?'flex':'none';
   if(d){
@@ -576,8 +576,8 @@ function doSendDir(){
       openEmailModal('Envoyer au directeur',[chosenEmail],function(emails){
         var prenomDest=EMAIL_PRENOMS[emails[0]];
         var body='Bonjour'+(prenomDest?' '+prenomDest:'')+',\n\nMerci de signer la demande de samedi tournant de '+data.prenom+' '+data.nom+' ('+data.societe+').';
-        body+='\n\nRecapitulatif :\n- Samedi travaille : '+cap(weekday(data.stD))+' '+fD(data.stD);
-        body+='\n- Repos habituel echange : '+cap(weekday(data.stR))+' '+fD(data.stR);
+        body+='\n\nRecapitulatif :\n- Samedi non travaille : '+cap(weekday(data.stD))+' '+fD(data.stD);
+        body+='\n- Date du jour de repos echange (travaille) : '+cap(weekday(data.stR))+' '+fD(data.stR);
         if(data.commentaire)body+='\n- Commentaire : '+data.commentaire;
         body+='\n\nLien pour signer (cliquez pour ouvrir) :\n\n'+dirUrl+'\n\nCordialement,\n'+data.prenom+' '+data.nom;
         body='══════════════════════════\n'+hdr+'\n══════════════════════════\n\n'+body;
@@ -609,8 +609,8 @@ async function doSendRH(){
   var decLabel=dec==='oui'?'AUTORISE':'REFUSE';
   var subj='[RH]['+decLabel+'] '+hdr;
   var body='══════════════════════════\n'+hdr+'\n══════════════════════════\n\nBonjour,\n\nLa demande de samedi tournant de '+d.prenom+' '+d.nom+' ('+d.societe+') a ete '+(dec==='oui'?'autorisee':'refusee')+' par le responsable.';
-  body+='\n\nRecapitulatif :\n- Samedi travaille : '+cap(weekday(d.stD))+' '+fD(d.stD);
-  body+='\n- Repos habituel echange : '+cap(weekday(d.stR))+' '+fD(d.stR);
+  body+='\n\nRecapitulatif :\n- Samedi non travaille : '+cap(weekday(d.stD))+' '+fD(d.stD);
+  body+='\n- Date du jour de repos echange (travaille) : '+cap(weekday(d.stR))+' '+fD(d.stR);
   if(d.commentaire)body+='\n- Commentaire collaborateur : '+d.commentaire;
   if(dec==='non'&&gv('refM'))body+='\n- Motif du refus : '+gv('refM');
   body+='\n\nCordialement,'+(sig?'\n'+sig:'');
@@ -660,17 +660,17 @@ async function doSendRH(){
   });
 }
 
-/* ─── Agenda Outlook (samedi travaille) ─── */
+/* ─── Agenda Outlook (jour de repos echange, travaille) ─── */
 function addOutlook(){
-  var d=_md;if(!d||!d.stD){toast('Date manquante');return}
+  var d=_md;if(!d||!d.stR){toast('Date manquante');return}
   function toICS(iso){return iso.replace(/-/g,'');}
   var uid=Date.now()+'@edgard-opticiens';
   var now=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
   function nextDay(iso){var dt=new Date(iso+'T00:00:00');dt.setDate(dt.getDate()+1);return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');}
-  var subj=(d.nom||'').toUpperCase()+' '+(d.prenom||'')+' - Samedi tournant travaille';
-  var desc='Samedi travaille en echange du repos habituel du '+fD(d.stR)+'. Demande validee par le responsable.';
+  var subj=(d.nom||'').toUpperCase()+' '+(d.prenom||'')+' - Samedi tournant, jour de repos travaille';
+  var desc='Jour de repos habituel travaille en echange du samedi non travaille du '+fD(d.stD)+'. Demande validee par le responsable.';
   var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Edgard Opticiens//SamediTournant//FR','CALSCALE:GREGORIAN','METHOD:PUBLISH',
-    'BEGIN:VEVENT','UID:'+uid,'DTSTAMP:'+now,'DTSTART;VALUE=DATE:'+toICS(d.stD),'DTEND;VALUE=DATE:'+toICS(nextDay(d.stD)),
+    'BEGIN:VEVENT','UID:'+uid,'DTSTAMP:'+now,'DTSTART;VALUE=DATE:'+toICS(d.stR),'DTEND;VALUE=DATE:'+toICS(nextDay(d.stR)),
     'SUMMARY:'+subj,'DESCRIPTION:'+desc,'TRANSP:OPAQUE','STATUS:CONFIRMED','END:VEVENT','END:VCALENDAR'].join('\r\n');
   var blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
   var url=URL.createObjectURL(blob);
@@ -779,8 +779,8 @@ function calcRecapFromLabels(stD,stR){
   var jrBlk=ge('jrBlk'),jrN=ge('jrN');
   if(!stD&&!stR){jrBlk.style.display='none';return;}
   var parts=[];
-  if(stD)parts.push('<b>'+cap(weekday(stD))+' '+fD(stD)+'</b> travaille');
-  if(stR)parts.push('en echange du <b>'+cap(weekday(stR))+' '+fD(stR)+'</b> (repos)');
+  if(stD)parts.push('<b>'+cap(weekday(stD))+' '+fD(stD)+'</b> non travaille');
+  if(stR)parts.push('en echange du <b>'+cap(weekday(stR))+' '+fD(stR)+'</b> travaille');
   jrN.innerHTML=parts.join(' ');
   jrBlk.style.display=parts.length?'flex':'none';
 }

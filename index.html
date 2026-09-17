@@ -122,14 +122,6 @@ body{background:#fff;padding:0;}
   <span id="bannerMsg">Remplissez votre demande, signez, puis cliquez sur <strong>Envoyer au directeur</strong></span>
 </div>
 
-<div class="tb" id="btnZone">
-  <button class="btn bol" onclick="resetForm()">Reinitialiser</button>
-  <button class="btn bdk" id="btnPDF" onclick="exportPDF()">PDF</button>
-  <button class="btn bgr" id="btnRH" style="display:none" onclick="doSendRH()">Envoyer aux RH</button>
-  <button class="btn bdk" id="btnCal" style="display:none" onclick="addOutlook()">Agenda Outlook</button>
-  <button class="btn bg" id="btnDir" onclick="doSendDir()">Envoyer au directeur</button>
-</div>
-
 <div id="wrap">
   <div class="hdr">
     <div><div class="logo">EDGARD</div><div class="logos">Opticiens</div></div>
@@ -200,6 +192,13 @@ body{background:#fff;padding:0;}
           </div>
         </div>
       </div>
+    </div>
+    <div class="tb" id="btnZone" style="margin-top:16px">
+      <button class="btn bol" onclick="resetForm()">Reinitialiser</button>
+      <button class="btn bdk" id="btnPDF" onclick="exportPDF()">PDF</button>
+      <button class="btn bgr" id="btnRH" style="display:none" onclick="doSendRH()">Envoyer aux RH</button>
+      <button class="btn bdk" id="btnCal" style="display:none" onclick="addOutlook()">Agenda Outlook</button>
+      <button class="btn bg" id="btnDir" onclick="doSendDir()">Envoyer au directeur</button>
     </div>
   </div>
 </div>

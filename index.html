@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script>
+try{
+  var _xhrM=new XMLHttpRequest();
+  _xhrM.open('GET','maintenance.txt?_='+Date.now(),false);
+  _xhrM.send(null);
+  if(_xhrM.status===200 && _xhrM.responseText.trim().toLowerCase()==='on'){
+    document.write('<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Maintenance — Samedi Tournant</title></head><body style="font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#F9F7F2;color:#1A1A1A"><div style="text-align:center;padding:20px;max-width:400px"><h2 style="font-family:Georgia,serif;margin-bottom:10px">Formulaire temporairement indisponible</h2><p style="color:#666;font-size:14px">Une mise a jour est en cours. Merci de reessayer dans quelques minutes.</p></div></body></html>');
+    document.close();
+  }
+}catch(e){}
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demande de Samedi Tournant - Edgard Opticiens</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{--g:#C9A84C;--gl:#E8C96A;--gp:#F5EDD0;--dk:#1A1A1A;--md:#4A4A4A;--lt:#F9F7F2;--bd:#D8CBA8;--r:6px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#EEEBE3;min-height:100vh;padding:16px 10px 40px;color:var(--dk)}
+.banner{max-width:860px;margin:0 auto 10px;padding:9px 16px;border-radius:7px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.bc{background:#E8F4E8;border:1.5px solid #27AE60;color:#1E7E34}
+.bd2{background:#FFF3CD;border:1.5px solid var(--g);color:#856404}
+.badge{padding:2px 9px;border-radius:10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.bc .badge{background:#27AE60;color:#fff}.bd2 .badge{background:var(--g);color:#fff}
+.tb{max-width:860px;margin:0 auto 12px;display:flex;gap:7px;justify-content:flex-end;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:9px 17px;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
+.bg{background:var(--g);color:#fff}.bg:hover{background:var(--gl)}
+.bdk{background:var(--dk);color:#fff}.bdk:hover{background:#333}
+.bgr{background:#27AE60;color:#fff}.bgr:hover{background:#219A52}
+.bol{background:transparent;border:2px solid var(--g);color:var(--g)}.bol:hover{background:var(--gp)}
+#wrap{max-width:860px;margin:0 auto;background:#fff;border-radius:10px;box-shadow:0 6px 30px rgba(0,0,0,.12);overflow:hidden}
+.hdr{background:var(--dk);padding:16px 28px;display:flex;align-items:center;gap:16px}
+.logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--g);letter-spacing:3px}
+.logos{font-size:9px;letter-spacing:5px;color:#888;text-transform:uppercase;margin-top:2px}
+.hline{flex:1;height:1px;background:linear-gradient(to right,var(--g),transparent);margin:0 14px}
+.htit{text-align:right}.htit h1{font-family:'Playfair Display',serif;font-size:14px;color:#fff;font-weight:600;line-height:1.25}
+.sdis{font-size:10px;color:var(--g);margin-top:3px;font-weight:600}
+.fb{padding:14px 24px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--g);margin-bottom:3px;display:block}
+.inp{border:none;border-bottom:1.5px solid var(--bd);padding:5px 2px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--dk);background:transparent;outline:none;transition:border-color .2s;width:100%}
+.inp:focus{border-bottom-color:var(--g)}
+.sel{width:100%;border:none;border-bottom:1.5px solid var(--bd);padding:6px 22px 6px 2px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--dk);background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C9A84C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 2px center;outline:none;cursor:pointer;appearance:none}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px;padding-bottom:12px;border-bottom:1.5px solid var(--gp)}
+.fg{display:flex;flex-direction:column}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:10px}
+.sec{margin-bottom:10px;border:1.5px solid var(--g);border-radius:var(--r);overflow:hidden}
+.sec-hdr{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--lt);border-bottom:1.5px solid var(--gp)}
+.sec-ttl{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:var(--dk)}
+.sec-body{padding:12px 18px;background:#fff}
+.jr{display:flex;align-items:center;gap:10px;background:var(--gp);border:1.5px solid var(--g);border-radius:5px;padding:9px 14px;margin-top:10px}
+.jrn{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--dk);line-height:1.5}
+.jrn b{color:var(--g)}
+.jrwarn{margin-top:8px;padding:7px 10px;background:#FDECEA;border-left:3px solid #D9534F;border-radius:0 4px 4px 0;font-size:11px;color:#a33;display:none}
+.rappel{background:#FFF8E7;border-left:3px solid var(--g);padding:7px 10px;margin-top:10px;border-radius:0 4px 4px 0;font-size:10.5px;color:var(--md)}
+textarea.inp{border:1.5px solid var(--bd);border-radius:4px;padding:5px 8px;resize:vertical;min-height:40px;font-size:12px;width:100%;margin-top:3px}
+.sigs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.sigbox{border:1.5px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.sighdr{background:var(--lt);padding:7px 12px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--md);display:flex;justify-content:space-between;align-items:center}
+.sigclr{background:none;border:none;cursor:pointer;font-size:10px;color:var(--g);font-weight:700;padding:2px 4px}
+.sigft{padding:5px 12px;border-top:1px solid var(--bd);font-size:10px;color:var(--md);background:#FAFAF8;line-height:1.5}
+.locked{position:relative}
+.shield{position:absolute;inset:0;background:rgba(249,247,242,.96);border-radius:var(--r);border:2px dashed var(--bd);z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;padding:12px}
+.decbox{border:1.5px solid var(--bd);border-radius:var(--r);padding:10px}
+.dectit{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--g);margin-bottom:7px}
+.rrow{display:flex;gap:12px;margin-bottom:7px;flex-wrap:wrap}
+.ri{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px}
+.ri input{accent-color:var(--g);width:13px;height:13px}
+.np{display:none}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center;padding:16px}
+.modal.show{display:flex}
+.mbox{background:#fff;border-radius:12px;max-width:500px;width:100%;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.mttl{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--dk);margin-bottom:12px}
+.emlRow{display:flex;gap:6px;margin-bottom:8px;align-items:center}
+.emlRow input{flex:1;border:1.5px solid var(--bd);border-radius:6px;padding:8px 10px;font-size:13px}
+.emlRow input:invalid:not(:placeholder-shown){border-color:#D9534F}
+.emlDel{background:none;border:none;color:#D9534F;font-size:18px;cursor:pointer;padding:0 4px;line-height:1;flex-shrink:0}
+.emlAdd{background:none;border:1.5px dashed var(--bd);border-radius:6px;padding:7px 12px;font-size:12px;color:var(--g);cursor:pointer;width:100%;margin-bottom:14px}
+.emlAdd:hover{background:var(--lt)}
+#sp{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#fff;font-size:13px}
+#sp.show{display:flex}
+.spi{width:38px;height:38px;border:3px solid rgba(255,255,255,.3);border-top-color:var(--g);border-radius:50%;animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dk);color:#fff;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:500;transition:transform .3s;z-index:9999;pointer-events:none;max-width:400px;text-align:center}
+#toast.show{transform:translateX(-50%) translateY(0)}
+@media print{
+*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+body{background:#fff;padding:0;}
+.tb,.banner,.modal{display:none!important}
+#wrap{box-shadow:none;border-radius:0;max-width:100%}
+.shield{display:none!important}
+#sigCArea svg,#sigRArea svg{background:#fff!important;}
+#sigCArea svg rect,#sigRArea svg rect{fill:#fff!important;}
+}
+</style>
+</head>
+<body>
+<div id="sp"><div class="spi"></div><span id="spmsg">...</span></div>
+<div id="toast"></div>
+
+<div class="modal" id="mdlEmails">
+  <div class="mbox">
+    <div class="mttl" id="emlTitle">Destinataires</div>
+    <div style="font-size:11.5px;color:#8a8375;margin-bottom:10px">Absent(e) ? Vous pouvez modifier l'adresse proposee ou en ajouter une autre.</div>
+    <div id="emailFields"></div>
+    <button type="button" class="emlAdd" onclick="addEmailField('')">+ Ajouter une adresse</button>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn bol" style="font-size:12px;padding:8px 16px" onclick="closeM('mdlEmails')">Annuler</button>
+      <button class="btn bgr" style="font-size:12px;padding:8px 16px" onclick="confirmEmails()">Envoyer</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="mdlDirSelectHost"></div>
+
+<div class="banner bc" id="banner">
+  <span class="badge" id="badgeTxt">Collaborateur</span>
+  <span id="bannerMsg">Remplissez votre demande, signez, puis cliquez sur <strong>Envoyer au directeur</strong></span>
+</div>
+
+<div class="tb" id="btnZone">
+  <button class="btn bol" onclick="resetForm()">Reinitialiser</button>
+  <button class="btn bdk" id="btnPDF" onclick="exportPDF()">PDF</button>
+  <button class="btn bgr" id="btnRH" style="display:none" onclick="doSendRH()">Envoyer aux RH</button>
+  <button class="btn bdk" id="btnCal" style="display:none" onclick="addOutlook()">Agenda Outlook</button>
+  <button class="btn bg" id="btnDir" onclick="doSendDir()">Envoyer au directeur</button>
+</div>
+
+<div id="wrap">
+  <div class="hdr">
+    <div><div class="logo">EDGARD</div><div class="logos">Opticiens</div></div>
+    <div class="hline"></div>
+    <div class="htit"><h1>Demande de<br>Samedi Tournant</h1><div class="sdis" id="sdis"></div></div>
+  </div>
+  <div class="fb">
+    <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1.5px solid var(--gp)" id="socBlk">
+      <label class="lbl">Magasin</label>
+      <select class="sel" id="societe" onchange="updSoc()">
+        <option value="">-- Selectionnez votre magasin --</option>
+        <option>Ango</option><option>Biarro</option><option>Bordo</option>
+        <option>Caenpo</option><option>Giro</option><option>Havro</option>
+        <option>Jisam</option><option>Lyono</option><option>Manso</option>
+        <option>Marseillo</option><option>Nanceo</option><option>Nanto</option>
+        <option>Niceo</option><option>Orlo</option><option>Reimo</option>
+        <option>Strabo</option><option>Turo</option>
+      </select>
+    </div>
+    <div class="r2" id="idBlk">
+      <div class="fg"><label class="lbl">Nom</label><input class="inp" type="text" id="nom" placeholder="Nom de famille" autocomplete="off"></div>
+      <div class="fg"><label class="lbl">Prenom</label><input class="inp" type="text" id="prenom" placeholder="Prenom" autocomplete="off"></div>
+    </div>
+    <div class="sec" id="secST">
+      <div class="sec-hdr"><span class="sec-ttl">Echange de samedi tournant</span></div>
+      <div class="sec-body">
+        <div class="dg">
+          <div class="fg"><label class="lbl">Samedi travaille</label><input class="inp" type="date" id="stD" onchange="calcRecap()" autocomplete="off"></div>
+          <div class="fg"><label class="lbl">Jour de repos habituel echange</label><input class="inp" type="date" id="stR" onchange="calcRecap()" autocomplete="off"></div>
+        </div>
+        <div class="jr" id="jrBlk" style="display:none"><div class="jrn" id="jrN"></div></div>
+        <div class="jrwarn" id="jrWarn">La date saisie comme "samedi travaille" ne tombe pas un samedi. Verifiez la date.</div>
+        <div class="fg" style="margin-top:10px"><label class="lbl">Commentaire (facultatif)</label><textarea class="inp" id="commentaire" rows="2" placeholder="Precision utile pour le directeur ou les RH..."></textarea></div>
+        <div class="rappel">Ce samedi est travaille en echange du jour de repos habituel indique ci-dessus, qui sera lui non travaille sur la semaine concernee.</div>
+      </div>
+    </div>
+    <div class="sigs">
+      <div>
+        <div class="sigbox">
+          <div class="sighdr">Signature du collaborateur <button class="sigclr" id="btnClrC" onclick="clrSvgSign()">X Effacer</button></div>
+          <div id="sigCArea" style="width:100%;height:90px;background:#fff;"></div>
+          <div class="sigft"><span id="sigVille"></span><span id="sigSep"></span>le <strong id="today"></strong><br><span id="tsC" style="color:var(--g)"></span></div>
+        </div>
+      </div>
+      <div id="dirBlk" class="locked">
+        <div class="shield" id="shield"><div style="font-size:22px">&#x1F512;</div><div style="font-size:10px;font-weight:600;color:var(--md);line-height:1.5">Reserve au directeur</div></div>
+        <div class="decbox">
+          <div class="dectit">Decision du responsable</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+            <div class="fg"><label class="lbl" style="margin-bottom:3px">Nom du responsable</label><input class="inp" type="text" id="dirNom" placeholder="Nom" autocomplete="off"></div>
+            <div class="fg"><label class="lbl" style="margin-bottom:3px">Prenom du responsable</label><input class="inp" type="text" id="dirPrenom" placeholder="Prenom" autocomplete="off"></div>
+          </div>
+          <div class="rrow">
+            <label class="ri"><input type="radio" name="dec" value="oui"> Autorise l'echange</label>
+            <label class="ri"><input type="radio" name="dec" value="non"> Refus</label>
+          </div>
+          <div class="fg"><label class="lbl" style="margin-bottom:3px">Motif si refus</label><textarea class="inp" id="refM" rows="2" placeholder="Motif..."></textarea></div>
+          <div style="margin-top:9px">
+            <div class="sigbox">
+              <div class="sighdr">Signature du responsable <button class="sigclr" onclick="clrSvgSignR()">X Effacer</button></div>
+              <div id="sigRArea" style="width:100%;height:90px;background:#fff;cursor:crosshair;touch-action:none;"></div>
+              <div class="sigft"><span id="tsR" style="color:var(--g)"></span>&nbsp;</div>
+            </div>
+          </div>
+          <div id="calBox" class="np" style="margin-top:10px;padding:9px 12px;background:var(--gp);border:1.5px solid var(--g);border-radius:6px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--g);margin-bottom:6px">Ajouter a l agenda</div>
+            <button class="btn bdk" style="font-size:12px;padding:7px 14px" onclick="addOutlook()">Ouvrir dans Outlook</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+/* ─── Utilitaires generaux ─── */
+function ge(i){return document.getElementById(i)}
+function gv(i){var e=ge(i);return e?e.value:''}
+function fD(iso){if(!iso)return'-';var p=iso.split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:iso}
+function fNow(){var d=new Date();return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})+' a '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}
+function toast(m,ms){var t=ge('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},ms||3500)}
+function spin(m){ge('spmsg').textContent=m||'...';ge('sp').classList.add('show')}
+function unspin(){ge('sp').classList.remove('show')}
+function closeM(id){ge(id).classList.remove('show')}
+window.addEventListener('click',function(e){if(e.target.classList.contains('modal'))e.target.classList.remove('show')})
+function weekday(iso){if(!iso)return'';var d=new Date(iso+'T00:00:00');return d.toLocaleDateString('fr-FR',{weekday:'long'})}
+function cap(s){return s?s.charAt(0).toUpperCase()+s.slice(1):s}
+
+/* ─── Mapping ville (pour "Fait a ...") ─── */
+var CITY={'Turo':'Tours','Bordo':'Tours','Ango':'Angers','Biarro':'Biarritz','Caenpo':'Caen','Giro':'Bordeaux','Havro':'Le Havre','Jisam':'Saint-Germain-en-Laye','Lyono':'Lyon','Manso':'Le Mans','Marseillo':'Marseille','Nanceo':'Nancy','Nanto':'Nantes','Niceo':'Nice','Orlo':'Orleans','Reimo':'Reims','Strabo':'Strasbourg'};
+function getCity(s){return CITY[s]||''}
+
+/* ─── Emails RH et directeurs par magasin (memes listes que le formulaire de conges) ─── */
+var RH_MAILS={
+  'Ango':'angers@groupe-edgard.com','Biarro':'biarritz@groupe-edgard.com','Bordo':'tours-bordo@groupe-edgard.com',
+  'Caenpo':'caen@groupe-edgard.com','Giro':'bordeaux@groupe-edgard.com','Havro':'lehavre@groupe-edgard.com',
+  'Jisam':'saintgermain@groupe-edgard.com','Lyono':'lyon@groupe-edgard.com','Manso':'lemans@groupe-edgard.com',
+  'Marseillo':'marseille@groupe-edgard.com','Nanceo':'nancy@groupe-edgard.com','Nanto':'nantes@groupe-edgard.com',
+  'Niceo':'nice@groupe-edgard.com','Orlo':'orleans@groupe-edgard.com','Reimo':'reims@groupe-edgard.com',
+  'Strabo':'strasbourg@groupe-edgard.com','Turo':'tours-marceau@groupe-edgard.com'
+};
+function getRhMail(societe){return RH_MAILS[societe]||'ressources-humaines@groupe-edgard.com';}
+var DIRECTOR_LIST=[
+  {societe:'Ango',prenom:'Thibault',nom:'ECHALIER',email:'t.echalier@groupe-edgard.com'},
+  {societe:'Biarro',prenom:'Baptiste',nom:'TELLECHEA',email:'b.tellechea@groupe-edgard.com'},
+  {societe:'Bordo',prenom:'Vincent',nom:'GOGDET',email:'v.gogdet@groupe-edgard.com'},
+  {societe:'Caenpo',prenom:'Stephane',nom:'HERREMANS',email:'s.herremans@groupe-edgard.com'},
+  {societe:'Giro',prenom:'Sylvain',nom:'LANGLADE',email:'s.langlade@groupe-edgard.com'},
+  {societe:'Havro',prenom:'Emmanuel',nom:'VARIN',email:'e.varin@groupe-edgard.com'},
+  {societe:'Jisam',prenom:'Gaelle',nom:'BESSENET',email:'g.bessenet@groupe-edgard.com'},
+  {societe:'Lyono',prenom:'Anne Veronique',nom:'LEVRAULT',email:'a.levrault@groupe-edgard.com'},
+  {societe:'Manso',prenom:'Megane',nom:'GENDRE',email:'m.gendre@groupe-edgard.com'},
+  {societe:'Marseillo',prenom:'Jean',nom:'DESCAMPS',email:'j.descamps@groupe-edgard.com'},
+  {societe:'Nanceo',prenom:'Camille',nom:'BOUTOLLEAU',email:'c.boutolleau@groupe-edgard.com'},
+  {societe:'Nanto',prenom:'Jacky',nom:'GUILLOT',email:'j.guillot@groupe-edgard.com'},
+  {societe:'Niceo',prenom:'Mathilde',nom:'BOURDET',email:'m.bourdet@groupe-edgard.com'},
+  {societe:'Orlo',prenom:'Elise',nom:'ORINEL',email:'e.orinel@groupe-edgard.com'},
+  {societe:'Reimo',prenom:'Erwan',nom:'DESPEIGNES',email:'e.despeignes@groupe-edgard.com'},
+  {societe:'Strabo',prenom:'Sophie',nom:'OLTZ',email:'s.oltz@groupe-edgard.com'},
+  {societe:'Turo',prenom:'Vincent',nom:'GOGDET',email:'v.gogdet@groupe-edgard.com'}
+];
+var EMAIL_PRENOMS={
+  't.echalier@groupe-edgard.com':'Thibault','b.tellechea@groupe-edgard.com':'Baptiste','v.gogdet@groupe-edgard.com':'Vincent',
+  's.herremans@groupe-edgard.com':'Stephane','s.langlade@groupe-edgard.com':'Sylvain','e.varin@groupe-edgard.com':'Emmanuel',
+  'g.bessenet@groupe-edgard.com':'Gaelle','a.levrault@groupe-edgard.com':'Anne Veronique','m.gendre@groupe-edgard.com':'Megane',
+  'j.descamps@groupe-edgard.com':'Jean','c.boutolleau@groupe-edgard.com':'Camille','j.guillot@groupe-edgard.com':'Jacky',
+  'm.bourdet@groupe-edgard.com':'Mathilde','e.orinel@groupe-edgard.com':'Elise','e.despeignes@groupe-edgard.com':'Erwan',
+  's.oltz@groupe-edgard.com':'Sophie'
+};
+/* Verification (reutilise le webhook existant "direction-actif" du formulaire de conges) : le directeur est-il en conge ? */
+var DIRECTION_ACTIF_URL='https://edgard-opticiens.app.n8n.cloud/webhook/direction-actif';
+function openDirectorSelect(societe,cb){
+  var box=document.createElement('div');box.className='modal show';box.id='mdlDirSelect';
+  var matches=DIRECTOR_LIST.filter(function(d){return d.societe===societe;});
+  var baseOpts=matches.map(function(d){return '<option value="'+d.email+'">'+d.prenom+' '+d.nom+' (directeur du magasin)</option>';}).join('');
+  box.innerHTML='<div class="mbox"><div class="mttl">Envoyer la demande a quel destinataire ?</div>'
+    +'<div id="dirDelegNote" style="display:none;font-size:12px;color:#9a6b16;background:#fdf3dd;border:1px solid #f0dca6;border-radius:6px;padding:8px 10px;margin-bottom:10px"></div>'
+    +'<select id="dirSelect" style="width:100%;padding:9px 10px;border:1.5px solid var(--bd);border-radius:6px;font-size:13px;margin-bottom:10px">'+baseOpts
+    +'<option value="__custom__">+ Ajouter une autre adresse mail</option></select>'
+    +'<input id="dirCustomInput" type="email" placeholder="adresse@groupe-edgard.com" style="display:none;width:100%;padding:9px 10px;border:1.5px solid var(--bd);border-radius:6px;font-size:13px;margin-bottom:14px;box-sizing:border-box">'
+    +'<div style="display:flex;gap:8px;justify-content:flex-end">'
+    +'<button class="btn bol" style="font-size:12px;padding:8px 16px" id="dirSelectCancel">Annuler</button>'
+    +'<button class="btn bgr" style="font-size:12px;padding:8px 16px" id="dirSelectOk">Continuer</button>'
+    +'</div></div>';
+  document.body.appendChild(box);
+  var selectEl=box.querySelector('#dirSelect');
+  var customInput=box.querySelector('#dirCustomInput');
+  var note=box.querySelector('#dirDelegNote');
+  fetch(DIRECTION_ACTIF_URL+'?societe='+encodeURIComponent(societe)).then(function(r){return r.json();}).then(function(res){
+    if(res&&res.ok&&res.directeurAbsent){
+      if(res.delegation&&res.email){
+        var opt=document.createElement('option');
+        opt.value=res.email;
+        opt.textContent=res.nomComplet+' — Adjoint (le directeur est actuellement en conges)';
+        selectEl.insertBefore(opt,selectEl.firstChild);
+        selectEl.value=res.email;
+      }
+      note.style.display='block';
+      note.textContent="Le directeur est en conges, la demande va etre envoyee a son adjoint. Si pas d'adjoint dans le magasin, merci de renseigner l'adresse mail du signataire.";
+    }
+  }).catch(function(){/* en cas d'echec, on garde simplement le comportement normal */});
+  selectEl.onchange=function(){
+    if(selectEl.value==='__custom__'){customInput.style.display='block';customInput.focus();}
+    else{customInput.style.display='none';}
+  };
+  box.querySelector('#dirSelectCancel').onclick=function(){document.body.removeChild(box);};
+  box.querySelector('#dirSelectOk').onclick=function(){
+    var email=selectEl.value;
+    if(email==='__custom__'){
+      email=customInput.value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){customInput.style.borderColor='#D9534F';toast('Adresse email invalide');return;}
+    }
+    document.body.removeChild(box);
+    cb(email);
+  };
+}
+
+/* ─── Suivi n8n (nouveaux webhooks dedies au samedi tournant, a creer cote n8n) ─── */
+var N8N_LOG='https://edgard-opticiens.app.n8n.cloud/webhook/log-samedi-tournant';
+function logToSheet(payload){
+  fetch(N8N_LOG,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(){/* silencieux */});
+}
+function makeId(d){return (d.societe||'')+'_'+(d.nom||'')+'_'+(d.prenom||'')+'_'+(d.stD||new Date().toISOString().slice(0,10));}
+
+/* ─── Envoi mail silencieux (nouveau webhook dedie, a creer cote n8n) ─── */
+var N8N_MAIL='https://edgard-opticiens.app.n8n.cloud/webhook/envoi-mail-samedi-tournant';
+var _emlCallback=null;
+function addEmailField(val){
+  var row=document.createElement('div');row.className='emlRow';
+  var inp=document.createElement('input');
+  inp.type='email';inp.placeholder='adresse@groupe-edgard.com';inp.value=val||'';inp.required=true;
+  var del=document.createElement('button');del.type='button';del.className='emlDel';del.innerHTML='&times;';
+  del.onclick=function(){var fields=ge('emailFields');if(fields.children.length>1)fields.removeChild(row);else inp.value='';};
+  row.appendChild(inp);row.appendChild(del);
+  ge('emailFields').appendChild(row);
+}
+function openEmailModal(title,prefill,cb){
+  ge('emlTitle').textContent=title;
+  var fields=ge('emailFields');fields.innerHTML='';
+  if(prefill&&prefill.length){prefill.forEach(function(e){addEmailField(e)});}else{addEmailField('');}
+  _emlCallback=cb;
+  ge('mdlEmails').classList.add('show');
+}
+function confirmEmails(){
+  var inputs=ge('emailFields').querySelectorAll('input[type="email"]');
+  var emails=[];var bad=false;
+  inputs.forEach(function(i){
+    var v=i.value.trim();if(!v)return;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){bad=true;i.style.borderColor='#D9534F';}
+    else emails.push(v);
+  });
+  if(bad){toast('Une adresse saisie n\'est pas valide');return;}
+  if(!emails.length){toast('Saisissez au moins une adresse');return;}
+  var cb=_emlCallback;ge('mdlEmails').classList.remove('show');
+  if(cb)cb(emails);
+}
+function sendMailSilent(payload){
+  return fetch(N8N_MAIL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+}
+
+/* ─── Formulaire ─── */
+function updSoc(){
+  var v=gv('societe'),c=getCity(v);
+  ge('sdis').textContent=v||'';
+  ge('sigVille').textContent=c?'A '+c:'';
+  ge('sigSep').textContent=c?', ':'';
+}
+function calcRecap(){
+  var d=gv('stD'),r=gv('stR');
+  var jrBlk=ge('jrBlk'),jrN=ge('jrN'),jrWarn=ge('jrWarn');
+  if(!d&&!r){jrBlk.style.display='none';jrWarn.style.display='none';return;}
+  var parts=[];
+  if(d)parts.push('<b>'+cap(weekday(d))+' '+fD(d)+'</b> travaille');
+  if(r)parts.push('en echange du <b>'+cap(weekday(r))+' '+fD(r)+'</b> (repos)');
+  jrN.innerHTML=parts.join(' ');
+  jrBlk.style.display=parts.length?'flex':'none';
+  if(d){
+    var dd=new Date(d+'T00:00:00');
+    jrWarn.style.display=(dd.getDay()!==6)?'block':'none';
+  } else jrWarn.style.display='none';
+}
+
+/* ─── Signature collaborateur — SVG interactif (jamais noir sur iOS) ─── */
+var _tsC='',_tsR='';
+var NS='http://www.w3.org/2000/svg';
+function initSvgSign(n){
+  n=n||0;var area=ge('sigCArea');if(!area||area._ok)return;
+  var w=area.offsetWidth;if(w<10){if(n<30)setTimeout(function(){initSvgSign(n+1);},100);return;}
+  area._ok=true;area._strokes=[];
+  var _cur=null,_curData=null,draw=false;
+  var svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 400 90');
+  svg.setAttribute('style','display:block;width:100%;height:90px;touch-action:none;cursor:crosshair;-webkit-user-select:none;user-select:none;background-color:#fff;');
+  var bg=document.createElementNS(NS,'rect');bg.setAttribute('width','400');bg.setAttribute('height','90');bg.setAttribute('fill','#fff');
+  svg.appendChild(bg);area.appendChild(svg);
+  function getPos(e){
+    var r=svg.getBoundingClientRect();
+    var s=e.changedTouches?e.changedTouches[0]:e.touches?e.touches[0]:e;
+    return[Math.min(99,Math.max(0,Math.round((s.clientX-r.left)/r.width*99))),Math.min(99,Math.max(0,Math.round((s.clientY-r.top)/r.height*99)))];
+  }
+  function startDraw(p){
+    draw=true;if(!_tsC){_tsC=fNow();var el=ge('tsC');if(el)el.textContent='Signe le '+_tsC;}
+    _curData=[p[0],p[1]];area._strokes.push(_curData);
+    _cur=document.createElementNS(NS,'path');
+    _cur.setAttribute('stroke','#1A1A1A');_cur.setAttribute('stroke-width','3');
+    _cur.setAttribute('stroke-linecap','round');_cur.setAttribute('stroke-linejoin','round');_cur.setAttribute('fill','none');
+    _cur.setAttribute('d','M'+(p[0]/99*400).toFixed(1)+','+(p[1]/99*90).toFixed(1));
+    svg.appendChild(_cur);
+  }
+  function moveDraw(p){if(!draw||!_cur)return;_curData.push(p[0],p[1]);_cur.setAttribute('d',_cur.getAttribute('d')+'L'+(p[0]/99*400).toFixed(1)+','+(p[1]/99*90).toFixed(1));}
+  function endDraw(){draw=false;_cur=null;_curData=null;}
+  document.addEventListener('touchmove',function(e){if(draw)try{e.preventDefault();}catch(x){}},{passive:false});
+  svg.addEventListener('mousedown',function(e){e.preventDefault();startDraw(getPos(e));});
+  svg.addEventListener('mousemove',function(e){if(!draw)return;e.preventDefault();moveDraw(getPos(e));});
+  svg.addEventListener('mouseup',endDraw);svg.addEventListener('mouseleave',endDraw);
+  svg.addEventListener('touchstart',function(e){e.preventDefault();e.stopPropagation();startDraw(getPos(e));},{passive:false,capture:true});
+  svg.addEventListener('touchmove',function(e){e.preventDefault();e.stopPropagation();moveDraw(getPos(e));},{passive:false,capture:true});
+  svg.addEventListener('touchend',function(e){e.preventDefault();endDraw();},{passive:false});
+  svg.addEventListener('touchcancel',endDraw);
+}
+function clrSvgSign(){
+  var area=ge('sigCArea');if(!area)return;area._strokes=[];
+  var svg=area.querySelector('svg');if(svg){var paths=svg.querySelectorAll('path');paths.forEach(function(p){svg.removeChild(p);});}
+  _tsC='';var el=ge('tsC');if(el)el.textContent='';
+}
+function initSvgSignR(n){
+  n=n||0;var area=ge('sigRArea');if(!area||area._ok)return;
+  var w=area.offsetWidth;if(w<10){if(n<30)setTimeout(function(){initSvgSignR(n+1);},100);return;}
+  area._ok=true;area._strokes=[];
+  var _cur=null,_curData=null,draw=false;
+  var svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 400 90');
+  svg.setAttribute('style','display:block;width:100%;height:90px;touch-action:none;cursor:crosshair;-webkit-user-select:none;user-select:none;background-color:#fff;');
+  var bg=document.createElementNS(NS,'rect');bg.setAttribute('width','400');bg.setAttribute('height','90');bg.setAttribute('fill','#fff');
+  svg.appendChild(bg);area.appendChild(svg);
+  function getPos(e){
+    var r=svg.getBoundingClientRect();
+    var s=e.changedTouches?e.changedTouches[0]:e.touches?e.touches[0]:e;
+    return[Math.min(99,Math.max(0,Math.round((s.clientX-r.left)/r.width*99))),Math.min(99,Math.max(0,Math.round((s.clientY-r.top)/r.height*99)))];
+  }
+  function startDraw(p){
+    draw=true;if(!_tsR){_tsR=fNow();var el=ge('tsR');if(el)el.textContent='Signe le '+_tsR;}
+    _curData=[p[0],p[1]];area._strokes.push(_curData);
+    _cur=document.createElementNS(NS,'path');
+    _cur.setAttribute('stroke','#1A1A1A');_cur.setAttribute('stroke-width','3');
+    _cur.setAttribute('stroke-linecap','round');_cur.setAttribute('stroke-linejoin','round');_cur.setAttribute('fill','none');
+    _cur.setAttribute('d','M'+(p[0]/99*400).toFixed(1)+','+(p[1]/99*90).toFixed(1));
+    svg.appendChild(_cur);
+  }
+  function moveDraw(p){if(!draw||!_cur)return;_curData.push(p[0],p[1]);_cur.setAttribute('d',_cur.getAttribute('d')+'L'+(p[0]/99*400).toFixed(1)+','+(p[1]/99*90).toFixed(1));}
+  function endDraw(){draw=false;_cur=null;_curData=null;}
+  document.addEventListener('touchmove',function(e){if(draw)try{e.preventDefault();}catch(x){}},{passive:false});
+  svg.addEventListener('mousedown',function(e){e.preventDefault();startDraw(getPos(e));});
+  svg.addEventListener('mousemove',function(e){if(!draw)return;e.preventDefault();moveDraw(getPos(e));});
+  svg.addEventListener('mouseup',endDraw);svg.addEventListener('mouseleave',endDraw);
+  svg.addEventListener('touchstart',function(e){e.preventDefault();e.stopPropagation();startDraw(getPos(e));},{passive:false,capture:true});
+  svg.addEventListener('touchmove',function(e){e.preventDefault();e.stopPropagation();moveDraw(getPos(e));},{passive:false,capture:true});
+  svg.addEventListener('touchend',function(e){e.preventDefault();endDraw();},{passive:false});
+  svg.addEventListener('touchcancel',endDraw);
+}
+function clrSvgSignR(){
+  var area=ge('sigRArea');if(!area)return;area._strokes=[];
+  var svg=area.querySelector('svg');if(svg){var paths=svg.querySelectorAll('path');paths.forEach(function(p){svg.removeChild(p);});}
+  _tsR='';var el=ge('tsR');if(el)el.textContent='';
+}
+function getSigRStrokes(){var a=ge('sigRArea');return(a&&a._strokes&&a._strokes.length)?a._strokes:null;}
+function isEmpty(id){if(id==='cvC'||id==='sigCArea'){var a=ge('sigCArea');return!a||!a._strokes||a._strokes.length===0;}var c=ge(id);return!c||!c._strokes||c._strokes.length===0;}
+function isEmptyR(){var a=ge('sigRArea');return!a||!a._strokes||a._strokes.length===0;}
+function cvStrokes(id){var el=(id==='cvC')?ge('sigCArea'):ge(id);return(el&&el._strokes&&el._strokes.length)?el._strokes:null;}
+
+/* ─── PDF (html2canvas + jsPDF), reprend le pattern des autres outils ─── */
+var _isIOS=/iPhone|iPad|iPod/i.test(navigator.userAgent);
+function sigsToCanvas(){
+  var areas=[{id:'sigCArea',strokes:_rh?(_rh.sigStrokes||null):(_md?(_md.sigStrokes||null):null)},
+             {id:'sigRArea',strokes:_rh?(_rh.sigRStrokes||null):(getSigRStrokes())}];
+  var saved=[];
+  areas.forEach(function(a){
+    var area=ge(a.id);if(!area)return;
+    var strokes=(area._strokes&&area._strokes.length)?area._strokes:a.strokes;
+    if(!strokes||!strokes.length)return;
+    var c=document.createElement('canvas');c.width=400;c.height=90;
+    var ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,400,90);
+    ctx.strokeStyle='#1A1A1A';ctx.lineWidth=2.5;ctx.lineCap='round';ctx.lineJoin='round';
+    for(var i=0;i<strokes.length;i++){var s=strokes[i];if(!s||s.length<4)continue;ctx.beginPath();ctx.moveTo(s[0]/99*400,s[1]/99*90);for(var j=2;j<s.length;j+=2)ctx.lineTo(s[j]/99*400,s[j+1]/99*90);ctx.stroke();}
+    c.style.cssText='display:block;width:100%;height:90px;';
+    saved.push({area:area,html:area.innerHTML});
+    area.innerHTML='';area.appendChild(c);
+  });
+  return saved;
+}
+function sigsRestore(saved){saved.forEach(function(s){s.area.innerHTML=s.html;});}
+async function genPDF(asBlob){
+  if(_isIOS)return null;
+  var sh=ge('shield');if(sh)sh.style.display='none';
+  document.querySelectorAll('.modal,#toast,#sp').forEach(function(el){el.style.visibility='hidden';});
+  var saved=[];
+  document.querySelectorAll('input[type="date"]').forEach(function(el){if(!el.value)return;saved.push({el:el,v:el.value});el.type='text';el.value=fD(el.value);});
+  var pdfNom=_rh?_rh.nom:(_md?_md.nom:gv('nom'));
+  var pdfPrenom=_rh?_rh.prenom:(_md?_md.prenom:gv('prenom'));
+  var sigsSaved=sigsToCanvas();
+  var res=null;
+  try{
+    var cv=await html2canvas(ge('wrap'),{scale:1.2,useCORS:true,allowTaint:false,logging:false,windowWidth:860});
+    saved.forEach(function(s){s.el.value='';s.el.type='date';s.el.value=s.v});saved=[];
+    sigsRestore(sigsSaved);
+    var img=cv.toDataURL('image/jpeg',.88);
+    var P=window.jspdf.jsPDF;
+    var margin=4,pageW=210,pageH=297,maxW=pageW-2*margin,maxH=pageH-2*margin;
+    var imgW=maxW,imgH=cv.height*imgW/cv.width;
+    if(imgH>maxH){imgH=maxH;imgW=cv.width*imgH/cv.height;}
+    var x=(pageW-imgW)/2,y=margin;
+    var pdf=new P({orientation:'portrait',unit:'mm',format:'a4'});
+    pdf.addImage(img,'JPEG',x,y,imgW,imgH);
+    var fn=('SamediTournant_'+pdfPrenom+'_'+pdfNom+(asBlob?'':'')+'.pdf').replace(/\s/g,'-');
+    if(asBlob){res=pdf.output('blob');}else{pdf.save(fn);res=true;}
+  }catch(e){res=null;}
+  document.querySelectorAll('.modal,#toast,#sp').forEach(function(el){el.style.visibility='';});
+  if(sh)sh.style.display='';
+  return res;
+}
+function printPDF(){
+  var saved=[];
+  document.querySelectorAll('input[type="date"]').forEach(function(el){if(!el.value)return;saved.push({el:el,v:el.value});el.type='text';el.value=fD(el.value);});
+  setTimeout(function(){window.print();setTimeout(function(){saved.forEach(function(s){s.el.value='';s.el.type='date';s.el.value=s.v;});},1000);},150);
+}
+async function exportPDF(){if(_isIOS){printPDF();return;}spin('PDF...');await genPDF(false);unspin();}
+
+/* ─── Collecte ─── */
+var _md=null,_rh=null;
+function collect(){
+  return{
+    societe:gv('societe'),ville:getCity(gv('societe')),
+    nom:gv('nom'),prenom:gv('prenom'),
+    stD:gv('stD'),stR:gv('stR'),commentaire:gv('commentaire'),
+    date:ge('today').textContent,tsC:_tsC,
+    sigStrokes:cvStrokes('cvC')
+  };
+}
+function mailHeader(d){
+  return (d.societe||'')+' - '+(d.nom||'').toUpperCase()+' '+(d.prenom||'')+' - Samedi '+fD(d.stD)+' / repos '+fD(d.stR);
+}
+function encodeHash(data){try{return encodeURIComponent(JSON.stringify(data));}catch(e){return'';}}
+function decodeHash(str){try{return JSON.parse(decodeURIComponent(str));}catch(e){return null;}}
+
+/* ─── Etape 1 : collaborateur -> directeur ─── */
+function doSendDir(){
+  if(!gv('societe')){toast('Selectionnez votre magasin');return}
+  if(!gv('nom').trim()||!gv('prenom').trim()){toast('Saisissez votre nom et prenom');return}
+  if(!gv('stD')||!gv('stR')){toast('Renseignez les deux dates de l\'echange');return}
+  if(isEmpty('cvC')){toast('Apposez votre signature');return}
+  spin('Generation du lien...');
+  var sh=ge('shield');if(sh)sh.style.display='none';
+  var data=collect();_md=data;
+  if(sh)sh.style.display='';
+  var encoded=encodeHash(data);
+  var base=(window.location.protocol==='https:')?window.location.href.split('?')[0].split('#')[0]:'https://edgard-opticiens.github.io/samedi-tournant';
+  var longUrl=base+'?d='+encoded;
+  function tryShorten(longUrl,cb){
+    var done=false;
+    var timer=setTimeout(function(){if(!done){done=true;cb(longUrl);}},4000);
+    fetch('https://is.gd/create.php?format=json&url='+encodeURIComponent(longUrl))
+      .then(function(r){return r.json()})
+      .then(function(res){
+        if(done)return;
+        if(res&&res.shorturl){done=true;clearTimeout(timer);cb(res.shorturl);}
+        else{
+          clearTimeout(timer);
+          fetch('https://tinyurl.com/api-create.php?url='+encodeURIComponent(longUrl))
+            .then(function(r){return r.text()}).then(function(t){done=true;cb((t&&t.startsWith('https'))?t:longUrl);}).catch(function(){done=true;cb(longUrl);});
+        }
+      })
+      .catch(function(){
+        if(done)return;clearTimeout(timer);
+        fetch('https://tinyurl.com/api-create.php?url='+encodeURIComponent(longUrl))
+          .then(function(r){return r.text()}).then(function(t){done=true;cb((t&&t.startsWith('https'))?t:longUrl);}).catch(function(){done=true;cb(longUrl);});
+      });
+  }
+  tryShorten(longUrl,function(dirUrl){
+    unspin();
+    var hdr=mailHeader(data);
+    var subj='[A SIGNER] '+hdr;
+    openDirectorSelect(data.societe,function(chosenEmail){
+      openEmailModal('Envoyer au directeur',[chosenEmail],function(emails){
+        var prenomDest=EMAIL_PRENOMS[emails[0]];
+        var body='Bonjour'+(prenomDest?' '+prenomDest:'')+',\n\nMerci de signer la demande de samedi tournant de '+data.prenom+' '+data.nom+' ('+data.societe+').';
+        body+='\n\nRecapitulatif :\n- Samedi travaille : '+cap(weekday(data.stD))+' '+fD(data.stD);
+        body+='\n- Repos habituel echange : '+cap(weekday(data.stR))+' '+fD(data.stR);
+        if(data.commentaire)body+='\n- Commentaire : '+data.commentaire;
+        body+='\n\nLien pour signer (cliquez pour ouvrir) :\n\n'+dirUrl+'\n\nCordialement,\n'+data.prenom+' '+data.nom;
+        body='══════════════════════════\n'+hdr+'\n══════════════════════════\n\n'+body;
+        spin('Envoi en cours...');
+        sendMailSilent({to:emails[0],cc:emails.slice(1),subject:subj,body:body})
+          .then(function(){unspin();toast('Demande envoyee au directeur');})
+          .catch(function(){unspin();toast('Erreur d\'envoi, reessayez');});
+        logToSheet({id:makeId(data),date_creation:new Date().toISOString(),societe:data.societe,nom:data.nom,prenom:data.prenom,
+          type:'Samedi tournant',date_samedi:data.stD,date_repos:data.stR,commentaire:data.commentaire||'',
+          etape:'directeur',statut:'en_attente',en_attente_nom:'Directeur',en_attente_email:emails.join(', '),lien:dirUrl});
+      });
+    });
+  });
+}
+
+/* ─── Etape 2 : directeur -> RH (direct, pas d'etape supplementaire) ─── */
+async function doSendRH(){
+  var d=_md||{nom:gv('nom'),prenom:gv('prenom'),societe:gv('societe'),stD:gv('stD'),stR:gv('stR'),commentaire:gv('commentaire')};
+  var dn=gv('dirNom'),dp=gv('dirPrenom');
+  if(!dn||!dn.trim()||!dp||!dp.trim()){toast('Saisissez le nom et prenom du responsable');return;}
+  var dec=(document.querySelector('input[name="dec"]:checked')||{}).value||'';
+  if(!dec){toast('Cochez Autorise ou Refus');return;}
+  if(isEmptyR()){toast('Le responsable doit apposer sa signature');return;}
+  var sig=(dp&&dn)?dp+' '+dn:'';
+  var rhMail=getRhMail(d.societe);
+  var prefillRH=['ressources-humaines@groupe-edgard.com'];
+  if(rhMail&&rhMail!=='ressources-humaines@groupe-edgard.com')prefillRH.push(rhMail);
+  var hdr=mailHeader(d);
+  var decLabel=dec==='oui'?'AUTORISE':'REFUSE';
+  var subj='[RH]['+decLabel+'] '+hdr;
+  var body='══════════════════════════\n'+hdr+'\n══════════════════════════\n\nBonjour,\n\nLa demande de samedi tournant de '+d.prenom+' '+d.nom+' ('+d.societe+') a ete '+(dec==='oui'?'autorisee':'refusee')+' par le responsable.';
+  body+='\n\nRecapitulatif :\n- Samedi travaille : '+cap(weekday(d.stD))+' '+fD(d.stD);
+  body+='\n- Repos habituel echange : '+cap(weekday(d.stR))+' '+fD(d.stR);
+  if(d.commentaire)body+='\n- Commentaire collaborateur : '+d.commentaire;
+  if(dec==='non'&&gv('refM'))body+='\n- Motif du refus : '+gv('refM');
+  body+='\n\nCordialement,'+(sig?'\n'+sig:'');
+  var rhData={mode:'rh',societe:d.societe,nom:d.nom,prenom:d.prenom,date:d.date,tsC:d.tsC,ville:d.ville||getCity(d.societe)||'',
+    stD:d.stD,stR:d.stR,commentaire:d.commentaire||'',sigStrokes:d.sigStrokes||null,sigRStrokes:getSigRStrokes()||null,
+    dirNom:dn,dirPrenom:dp,tsR:_tsR,dec:dec,refM:gv('refM')};
+  var base=(window.location.protocol==='https:')?window.location.href.split('?')[0].split('#')[0]:'https://edgard-opticiens.github.io/samedi-tournant';
+  var longUrl=base+'?r='+encodeURIComponent(JSON.stringify(rhData));
+  function shorten(url,cb){
+    var done=false;var t=setTimeout(function(){if(!done){done=true;cb(url);}},4000);
+    fetch('https://is.gd/create.php?format=json&url='+encodeURIComponent(url)).then(function(r){return r.json();})
+      .then(function(res){if(done)return;done=true;clearTimeout(t);cb((res&&res.shorturl)?res.shorturl:url);})
+      .catch(function(){
+        if(done)return;clearTimeout(t);
+        fetch('https://tinyurl.com/api-create.php?url='+encodeURIComponent(url)).then(function(r){return r.text();})
+          .then(function(t2){done=true;cb((t2&&t2.startsWith('https'))?t2:url);}).catch(function(){done=true;cb(url);});
+      });
+  }
+  spin('Generation...');
+  shorten(longUrl,function(rhUrl){
+    unspin();
+    var finish=function(){
+      var bodyFull=body+'\n\nLien pour consulter la demande signee :\n\n'+rhUrl;
+      openEmailModal('Envoyer aux RH',prefillRH,function(emails){
+        spin('Envoi en cours...');
+        sendMailSilent({to:emails[0],cc:emails.slice(1),subject:subj,body:bodyFull})
+          .then(function(){unspin();toast('Demande envoyee aux RH');})
+          .catch(function(){unspin();toast('Erreur d\'envoi, reessayez');});
+        logToSheet({id:makeId(d),societe:d.societe,nom:d.nom,prenom:d.prenom,type:'Samedi tournant',
+          date_samedi:d.stD,date_repos:d.stR,commentaire:d.commentaire||'',
+          etape:'termine',statut:dec==='oui'?'valide':'refuse',
+          en_attente_nom:'',en_attente_email:'',lien:rhUrl,
+          responsable:dp+' '+dn,motif_refus:dec==='non'?gv('refM'):''});
+      });
+    };
+    if(_isIOS){finish();return;}
+    genPDF(true).then(function(blob){
+      if(blob){
+        var fn=('SamediTournant_'+d.prenom+'_'+d.nom+'_SIGNE.pdf').replace(/\s/g,'-');
+        var burl=URL.createObjectURL(blob);
+        var a2=document.createElement('a');a2.href=burl;a2.download=fn;
+        document.body.appendChild(a2);a2.click();document.body.removeChild(a2);
+        setTimeout(function(){URL.revokeObjectURL(burl);},3000);
+      }
+      finish();
+    });
+  });
+}
+
+/* ─── Agenda Outlook (samedi travaille) ─── */
+function addOutlook(){
+  var d=_md;if(!d||!d.stD){toast('Date manquante');return}
+  function toICS(iso){return iso.replace(/-/g,'');}
+  var uid=Date.now()+'@edgard-opticiens';
+  var now=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  function nextDay(iso){var dt=new Date(iso+'T00:00:00');dt.setDate(dt.getDate()+1);return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');}
+  var subj=(d.nom||'').toUpperCase()+' '+(d.prenom||'')+' - Samedi tournant travaille';
+  var desc='Samedi travaille en echange du repos habituel du '+fD(d.stR)+'. Demande validee par le responsable.';
+  var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Edgard Opticiens//SamediTournant//FR','CALSCALE:GREGORIAN','METHOD:PUBLISH',
+    'BEGIN:VEVENT','UID:'+uid,'DTSTAMP:'+now,'DTSTART;VALUE=DATE:'+toICS(d.stD),'DTEND;VALUE=DATE:'+toICS(nextDay(d.stD)),
+    'SUMMARY:'+subj,'DESCRIPTION:'+desc,'TRANSP:OPAQUE','STATUS:CONFIRMED','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  var blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download=('SamediTournant_'+(d.nom||'')+'_'+(d.prenom||'')+'.ics').replace(/\s/g,'_');
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},3000);
+  toast('Fichier calendrier telecharge — ouvrez-le pour ajouter a votre agenda',5000);
+}
+
+function resetForm(){
+  if(!confirm('Reinitialiser ?'))return;
+  ['nom','prenom','stD','stR','commentaire','dirNom','dirPrenom','refM'].forEach(function(id){var el=ge(id);if(el)el.value=''});
+  ge('societe').selectedIndex=0;updSoc();
+  document.querySelectorAll('input[type="radio"]').forEach(function(r){r.checked=false});
+  ge('jrBlk').style.display='none';ge('jrWarn').style.display='none';
+  clrSvgSign();clrSvgSignR();
+  ge('calBox').style.display='none';ge('btnCal').style.display='none';
+  toast('Reinitialise');
+}
+
+/* ─── Init : lecture de ?d= (directeur) ou ?r= (RH) ─── */
+document.addEventListener('DOMContentLoaded',function(){
+  ge('today').textContent=new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
+  var search=window.location.search;
+  if(search){
+    var m=search.match(/[?&]d=([^&]*)/);
+    if(m){var decoded=decodeHash(m[1]);if(decoded&&decoded.nom)_md=decoded;}
+    var mr=search.match(/[?&]r=([^&]*)/);
+    if(mr){try{_rh=JSON.parse(decodeURIComponent(mr[1]));}catch(e){_rh=null;}}
+  }
+  /* Mode RH : lecture seule + telechargement PDF */
+  if(_rh&&_rh.mode==='rh'){
+    ge('banner').className='banner bd2';
+    ge('badgeTxt').textContent='RH';
+    ge('bannerMsg').innerHTML=(_rh.dec==='oui'?'Demande autorisee et signee':'Demande refusee')+' — <button class="btn bgr" style="padding:6px 14px;font-size:12px" onclick="exportPDF()">Telecharger le PDF</button>';
+    ge('btnDir').style.display='none';ge('btnRH').style.display='none';ge('btnPDF').style.display='none';
+    var sh=ge('shield');if(sh)sh.style.display='none';
+    var db=ge('dirBlk');if(db){db.classList.remove('locked');db.style.pointerEvents='none';}
+    if(_rh.societe){ge('sdis').textContent=_rh.societe;ge('societe').value=_rh.societe;}
+    if(_rh.nom)ge('nom').value=_rh.nom;
+    if(_rh.prenom)ge('prenom').value=_rh.prenom;
+    if(_rh.stD){ge('stD').type='text';ge('stD').value=fD(_rh.stD);}
+    if(_rh.stR){ge('stR').type='text';ge('stR').value=fD(_rh.stR);}
+    if(_rh.commentaire)ge('commentaire').value=_rh.commentaire;
+    calcRecapFromLabels(_rh.stD,_rh.stR);
+    var btnClrC2=ge('btnClrC');if(btnClrC2)btnClrC2.style.display='none';
+    var sigA=ge('sigCArea');
+    if(sigA&&_rh.sigStrokes&&_rh.sigStrokes.length){sigA.appendChild(strokesToSvgDiv(_rh.sigStrokes));}
+    var sigRA=ge('sigRArea');
+    if(sigRA&&_rh.sigRStrokes&&_rh.sigRStrokes.length){sigRA.appendChild(strokesToSvgDiv(_rh.sigRStrokes));}
+    if(_rh.dirNom){var elDN=ge('dirNom');if(elDN){elDN.type='text';elDN.value=_rh.dirNom;}}
+    if(_rh.dirPrenom){var elDP=ge('dirPrenom');if(elDP){elDP.type='text';elDP.value=_rh.dirPrenom;}}
+    if(_rh.dec){var decRadio=document.querySelector('input[name="dec"][value="'+_rh.dec+'"]');if(decRadio)decRadio.checked=true;}
+    if(_rh.refM){var elRM=ge('refM');if(elRM)elRM.value=_rh.refM;}
+    if(_rh.tsR&&ge('tsR'))ge('tsR').textContent='Signe le '+_rh.tsR;
+    var city3=_rh.ville||getCity(_rh.societe)||'';
+    if(city3){ge('sigVille').textContent='A '+city3;ge('sigSep').textContent=', ';}
+    if(_rh.date)ge('today').textContent=_rh.date;
+    if(_rh.tsC)ge('tsC').textContent='Signe le '+_rh.tsC;
+    document.querySelectorAll('#wrap input,#wrap select,#wrap textarea').forEach(function(el){el.setAttribute('readonly','');el.style.pointerEvents='none';});
+    return;
+  }
+  /* Mode directeur */
+  if(_md&&_md.nom&&_md.societe){
+    ge('banner').className='banner bd2';
+    ge('badgeTxt').textContent='Directeur';
+    ge('bannerMsg').innerHTML='Signez puis envoyez aux RH';
+    ge('btnDir').style.display='none';ge('btnRH').style.display='';
+    ge('btnPDF').textContent='PDF signe';
+    var sh2=ge('shield');if(sh2)sh2.style.display='none';
+    var db2=ge('dirBlk');if(db2){db2.classList.remove('locked');db2.style.pointerEvents='auto';}
+    if(_md.societe){ge('sdis').textContent=_md.societe;ge('societe').value=_md.societe;}
+    if(_md.nom)ge('nom').value=_md.nom;
+    if(_md.prenom)ge('prenom').value=_md.prenom;
+    if(_md.stD){ge('stD').type='text';ge('stD').value=fD(_md.stD);}
+    if(_md.stR){ge('stR').type='text';ge('stR').value=fD(_md.stR);}
+    if(_md.commentaire)ge('commentaire').value=_md.commentaire;
+    calcRecapFromLabels(_md.stD,_md.stR);
+    var btnClrC=ge('btnClrC');if(btnClrC)btnClrC.style.display='none';
+    var sigArea2=ge('sigCArea');
+    if(sigArea2&&_md.sigStrokes&&_md.sigStrokes.length){sigArea2.appendChild(strokesToSvgDiv(_md.sigStrokes));}
+    var city=_md.ville||getCity(_md.societe)||'';
+    if(city){ge('sigVille').textContent='A '+city;ge('sigSep').textContent=', ';}
+    if(_md.date)ge('today').textContent=_md.date;
+    if(_md.tsC)ge('tsC').textContent='Signe le '+_md.tsC;
+    ge('calBox').style.display='block';ge('btnCal').style.display='';
+    initSvgSignR(0);setTimeout(function(){initSvgSignR(0);},200);
+    ['nom','prenom','stD','stR','commentaire'].forEach(function(id){var el=ge(id);if(el)el.setAttribute('readonly','');});
+  } else {
+    initSvgSign(0);
+  }
+});
+function strokesToSvgDiv(strokes){
+  var paths='';
+  for(var i=0;i<strokes.length;i++){
+    var s=strokes[i];if(!s||s.length<2)continue;
+    var d='M'+(s[0]/99*400).toFixed(1)+','+(s[1]/99*90).toFixed(1);
+    if(s.length>=4){for(var j=2;j<s.length;j+=2)d+='L'+(s[j]/99*400).toFixed(1)+','+(s[j+1]/99*90).toFixed(1);}else d+='l0.5,0';
+    paths+='<path d="'+d+'" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>';
+  }
+  var div=document.createElement('div');div.style.cssText='width:100%;height:90px;background:#fff;';
+  div.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 90" style="display:block;width:100%;height:90px;background:#fff;">'+paths+'</svg>';
+  return div;
+}
+function calcRecapFromLabels(stD,stR){
+  var jrBlk=ge('jrBlk'),jrN=ge('jrN');
+  if(!stD&&!stR){jrBlk.style.display='none';return;}
+  var parts=[];
+  if(stD)parts.push('<b>'+cap(weekday(stD))+' '+fD(stD)+'</b> travaille');
+  if(stR)parts.push('en echange du <b>'+cap(weekday(stR))+' '+fD(stR)+'</b> (repos)');
+  jrN.innerHTML=parts.join(' ');
+  jrBlk.style.display=parts.length?'flex':'none';
+}
+</script>
+</body>
+</html>
